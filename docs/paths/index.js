@@ -1,11 +1,13 @@
 const auth = require("./auth");
-const post = require("./post");
 const user = require("./user");
+const service = require("./service");
+const option = require("./option");
 
 module.exports = {
   paths: {
     ...auth,
-    ...post,
     ...user,
+    ...service,
+    ...option,
   },
 };

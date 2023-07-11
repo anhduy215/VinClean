@@ -1,15 +1,15 @@
 module.exports = {
   get: {
-    tags: ["Post"],
-    summary: "Return post by ID",
+    tags: ["Option"],
+    summary: "Return option by ID",
     parameters: [
       {
         in: "path",
-        name: "postId",
-        // required: true,
-        description: "Post ID",
+        name: "optionID",
+        description: "optionID",
         schema: {
           type: "String",
+          format: "objectId",
         },
       },
     ],

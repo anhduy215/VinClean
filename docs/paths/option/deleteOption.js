@@ -1,16 +1,15 @@
 module.exports = {
   delete: {
-    tags: ["Post"],
-    summary: "Delete post",
+    tags: ["Option"],
+    summary: "delete option",
     parameters: [
       {
         in: "path",
-        name: "postId",
-        security: [{ BearerAuth: [] }],
-        // required: true,
-        description: "Post ID",
+        name: "optionID",
+        description: "optionID",
         schema: {
           type: "String",
+          format: "objectId",
         },
       },
     ],
