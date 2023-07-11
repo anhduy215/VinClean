@@ -1,16 +1,15 @@
 module.exports = {
-  put: {
-    tags: ["Post"],
-    summary: "Update post",
+  get: {
+    tags: ["Service"],
+    summary: "Return service by ID",
     parameters: [
       {
         in: "path",
-        name: "postId",
-        security: [{ BearerAuth: [] }],
-        // required: true,
-        description: "Post ID",
+        name: "serviceID",
+        description: "serviceID",
         schema: {
           type: "String",
+          format: "objectId",
         },
       },
     ],
