@@ -1,12 +1,13 @@
 const express = require("express");
-const controllersAuth = require("../controllers/auth");
+const auth = require("../controllers/auth");
 const controllersUser = require("../controllers/user");
-const validator = require("../validator");
 const router = express.Router();
 
-router.get("/signIn", controllersAuth.signIn);
-router.get("/signOut", controllersAuth.signOut);
+router.post("/signIn", auth.signIn);
+router.post("/signUp", auth.signUp);
+router.post("/verifyEmail", auth.verifyEmail);
+router.post("/signOut", auth.signOut);
+router.put("/verify-email", auth.verifyEmail);
 router.param("login", controllersUser.userByLogin);
-router.put("/verify-email", controllersAuth.verifyEmail);
-router.param("login", controllersUser.userByLogin);
+
 module.exports = router;

@@ -1,18 +1,15 @@
 module.exports = {
   post: {
-    tags: ["Auth"],
+    tags: ["User"],
+    security: [{ BearerAuth: [] }],
     requestBody: {
       required: true,
       content: {
-        "multipart/form-data": {
+        "application/json": {
           schema: {
             type: "object",
             properties: {
               name: {
-                type: "string",
-                example: "TrinhBinhMinh",
-              },
-              username: {
                 type: "string",
                 example: "dragoncute",
               },
@@ -26,11 +23,31 @@ module.exports = {
               },
               phone: {
                 type: "string",
-                example: "0123456789",
+                example: "0123456789"
+              },
+              block: {
+                type: "string",
+                example: "3A"
+              },
+              room: {
+                type: "string",
+                example: "012"
               },
               image: {
                 type: "string",
-                format: "binary",
+                example: "Hình ảnh"
+              },
+              status: {
+                type: "string",
+                example: "active or inactive"
+              },
+              role: {
+                type: 'array',
+                items: {
+                  type: 'string',
+                  enum: ['user', 'admin', 'company'],
+                },
+                default: ['user'],
               },
             },
           },

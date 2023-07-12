@@ -65,7 +65,6 @@ app.use(cookieParser());
 app.use(expressValidator());
 app.use(cors());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use(function (err, req, res, next) {

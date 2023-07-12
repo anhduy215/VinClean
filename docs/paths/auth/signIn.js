@@ -8,13 +8,13 @@ module.exports = {
           schema: {
             type: "object",
             properties: {
-              email: {
+              username: {
                 type: "string",
-                example: "longnlp14@gmail.com",
+                example: "dragoncute123",
               },
               password: {
                 type: "string",
-                example: "Long!123",
+                example: "Dragoncute!123",
               },
             },
           },
