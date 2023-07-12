@@ -1,13 +1,12 @@
 module.exports = {
-  delete: {
-    tags: ["Option"],
-    summary: "delete option",
-    security: [{ BearerAuth: [] }],
+  get: {
+    tags: ["Order"],
+    summary: "Return order by id",
     parameters: [
       {
         in: "path",
-        name: "optionID",
-        description: "optionID",
+        name: "orderID",
+        description: "orderID",
         schema: {
           type: "String",
           format: "objectId",

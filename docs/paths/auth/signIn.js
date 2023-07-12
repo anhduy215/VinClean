@@ -10,11 +10,11 @@ module.exports = {
             properties: {
               username: {
                 type: "string",
-                example: "dragoncute123",
+                example: "admin",
               },
               password: {
                 type: "string",
-                example: "Dragoncute!123",
+                example: "123",
               },
             },
           },

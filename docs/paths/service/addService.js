@@ -2,6 +2,7 @@ module.exports = {
   post: {
     tags: ["Service"],
     summary: "create Service",
+    security: [{ BearerAuth: [] }],
     requestBody: {
       required: true,
       content: {
