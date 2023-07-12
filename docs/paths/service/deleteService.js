@@ -2,6 +2,7 @@ module.exports = {
   delete: {
     tags: ["Service"],
     summary: "delete service",
+    security: [{ BearerAuth: [] }],
     parameters: [
       {
         in: "path",

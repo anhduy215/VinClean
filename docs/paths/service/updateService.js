@@ -2,6 +2,7 @@ module.exports = {
   put: {
     tags: ["Service"],
     summary: "update information of service",
+    security: [{ BearerAuth: [] }],
     parameters: [
       {
         in: "path",
