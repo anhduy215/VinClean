@@ -31,6 +31,7 @@ const optionRoutes = require("./routes/option");
 const serviceRoutes = require("./routes/service");
 const orderRoutes = require("./routes/order");
 const orderDetailRoutes = require("./routes/orderDetail");
+// const payment = require("./routes/payment");
 
 const options = {
   definition: {
@@ -75,6 +76,7 @@ app.use("/api", optionRoutes);
 app.use("/api", serviceRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", orderDetailRoutes);
+// app.use("/api", payment);
 app.use(function (err, req, res, next) {
   if (err.name === "UnauthorizedError") {
     res.status(401).json({ error: "Unauthorized!" });
