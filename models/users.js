@@ -11,12 +11,12 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     trim: true,
-    required: true,
+    default: null,
   },
   phone: {
     type: String,
     trim: true,
-    required: true,
+    default: null,
   },
   room: {
     type: String,
