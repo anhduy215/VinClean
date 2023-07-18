@@ -25,14 +25,6 @@ const signUp = async (req, res) => {
       }
       try {
         const userExists = await User.findOne({ username: req.body.username });
-        const emailExists = await User.findOne({ email: req.body.email });
-
-        if (emailExists) {
-          return res.status(403).json({
-            message: "Email is taken!",
-          });
-        }
-
         if (userExists) {
           return res.status(403).json({
             message: "Username is taken!",
