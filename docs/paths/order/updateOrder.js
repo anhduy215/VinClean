@@ -14,32 +14,6 @@ module.exports = {
         },
       },
     ],
-    // requestBody: {
-    //   required: true,
-    //   content: {
-    //     "application/json": {
-    //       schema: {
-    //         type: "object",
-    //         properties: {
-    //           order: {
-    //             type: "object",
-    //             properties: {
-    //               paymentID: {
-    //                 type: "string",
-    //                 format: "objectId",
-    //               },
-    //             }
-    //           },
-    //         },
-    //       },
-    //       example: {
-    //         order: {
-    //           paymentID: "123123",
-    //         },
-    //       },
-    //     },
-    //   },
-    // },
     responses: {
       200: {
         description: "Success",

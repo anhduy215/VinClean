@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Order = require("../models/order");
+const OrderDetail = require("../models/orderDetail");
 const mongoose = require("mongoose");
 
 //get all order
@@ -36,15 +37,8 @@ exports.getOrderById = async (req, res) => {
 //add order
 exports.addOrder = async (req, res) => {
     try {
-        // const { order } = req.body;
-        // const existingPayment = await Payment.findById(order.paymentID);
-        // if (!existingPayment) {
-        //     return res.status(400).json({ error: "Invalid payment ID" });
-        // }
-
         const newOrder = new Order({
             accountID: req.auth._id,
-            // paymentID: existingPayment._id,
         });
 
         const savedOrder = await newOrder.save();
@@ -58,7 +52,6 @@ exports.addOrder = async (req, res) => {
 //update order
 exports.updateOrder = async (req, res) => {
     try {
-        const { order } = req.body;
         const existingOrder = await Order.findById(req.params.orderID);
         if (!existingOrder) {
             return res.status(400).json({ error: "Invalid order ID" });
@@ -67,13 +60,14 @@ exports.updateOrder = async (req, res) => {
         if (existingOrder.accountID != req.auth._id) {
             return res.status(400).json({ error: "Invalid user ID" });
         }
+        const allOrderDetail = await OrderDetail.find({ orderID: req.params.orderID });
 
-        // const existingPayment = await Payment.findById(order.paymentID);
-        // if (!existingPayment) {
-        //     return res.status(400).json({ error: "Invalid payment ID" });
-        // }
+        let totalPrice = 0;
+        allOrderDetail.forEach((orderDetail) => {
+            totalPrice += orderDetail.price;
+        });
 
-        // existingOrder.paymentID = existingPayment._id;
+        existingOrder.total = totalPrice;
 
         const updatedOrder = await existingOrder.save();
 

@@ -12,5 +12,9 @@ const orderSchema = new mongoose.Schema({
   //   ref: "Payment",
   //   required: true,
   // },
+  total: {
+    type: Number,
+    trim: true,
+  },
 });
 module.exports = mongoose.model("Order", orderSchema);
