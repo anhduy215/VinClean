@@ -44,7 +44,7 @@ const options = {
     schemes: ["http", "https"],
     servers: [
       {
-        url: "http://localhost:8080/api",
+        url: "http://localhost:8089/api",
       },
     ],
   },
@@ -82,8 +82,8 @@ app.use(function (err, req, res, next) {
     res.status(401).json({ error: "Unauthorized!" });
   }
 });
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8089;
 // app.options("*", cors());
 app.listen(port, () => {
-  console.log(`a node js api listening on port ${port}, http://localhost:8080/api-docs`);
+  console.log(`a node js api listening on port ${port}, http://localhost:8089/api-docs`);
 });
