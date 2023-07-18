@@ -16,9 +16,6 @@ module.exports = {
                   serviceName: {
                     type: "string",
                   },
-                  description: {
-                    type: "string",
-                  },
                 },
               },
             },
@@ -26,7 +23,6 @@ module.exports = {
           example: {
             service: {
               serviceName: "serviceName",
-              description: "description",
             },
           },
         },

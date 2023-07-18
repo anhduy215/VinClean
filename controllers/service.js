@@ -41,7 +41,6 @@ exports.addService = async (req, res) => {
 
     const newService = new Service({
       serviceName: service.serviceName,
-      description: service.description,
     });
 
     const savedService = await newService.save();
@@ -63,7 +62,6 @@ exports.updateService = async (req, res) => {
     }
 
     existingService.serviceName = service.serviceName;
-    existingService.description = service.description;
 
     const updatedService = await existingService.save();
 
