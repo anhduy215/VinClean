@@ -4,7 +4,7 @@ module.exports = {
     requestBody: {
       required: true,
       content: {
-        "multipart/form-data": {
+        "application/json": {
           schema: {
             type: "object",
             properties: {
@@ -22,7 +22,7 @@ module.exports = {
               },
               image: {
                 type: "string",
-                format: "binary",
+                example: "urlFireBase",
               },
             },
           },

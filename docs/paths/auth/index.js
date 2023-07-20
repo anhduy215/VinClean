@@ -2,6 +2,7 @@ const signIn = require("./signIn");
 const signUp = require("./signUp");
 const signOut = require("./signOut");
 const verifyEmail = require("./verifyEmail");
+const upload = require("./postImage");
 module.exports = {
   "/signIn": {
     ...signIn,
@@ -14,5 +15,8 @@ module.exports = {
   },
   "/verifyEmail": {
     ...verifyEmail,
+  },
+  "/upload": {
+    ...upload,
   },
 };

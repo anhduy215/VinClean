@@ -15,7 +15,7 @@ module.exports = {
     requestBody: {
       required: true,
       content: {
-        "multipart/form-data": {
+        "application/json": {
           schema: {
             type: "object",
             properties: {
@@ -23,13 +23,13 @@ module.exports = {
                 type: "string",
                 example: "dragoncute",
               },
-              password: {
-                type: "string",
-                example: "Dragoncute!123",
-              },
               phone: {
                 type: "string",
                 example: "0123456789",
+              },
+              email:{
+                type: "string",
+                example: "email@example.com",
               },
               block: {
                 type: "string",
@@ -41,19 +41,7 @@ module.exports = {
               },
               image: {
                 type: "string",
-                format: "binary",
-              },
-              status: {
-                type: "string",
-                example: "active or inactive",
-              },
-              role: {
-                type: "array",
-                items: {
-                  type: "string",
-                  enum: ["user", "admin", "company"],
-                },
-                default: ["user"],
+                example: "url",
               },
             },
           },
