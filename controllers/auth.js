@@ -7,14 +7,14 @@ const _ = require("lodash");
 const { OAuth2Client } = require("google-auth-library");
 const { sendEmail } = require("../helpers");
 const { generateRandomPassword } = require("../helpers");
-const { upload,uploadFile } = require("../helpers/fbconfig");
+const { upload, uploadFile } = require("../helpers/fbconfig");
 const axios = require("axios");
 dotenv.config();
 
 const CLIENT_ID = "fac8f66eb69598dd2c8b";
 const CLIENT_SECRET = "d9db2ad94b6bd486ef3330810d9d3cc4e6edd8ad";
 
-const signUp = async (req, res) => {
+const uploadImage = async (req, res) => {
   try {
     const uploadMiddleware = upload.single('image');
     uploadMiddleware(req, res, async (err) => {
@@ -22,43 +22,74 @@ const signUp = async (req, res) => {
         return res.status(400).json({
           error: err.message
         });
+      } 
+      // Check if there is an uploaded image
+      if (req.file) {
+        const file = req.file;
+
+        // Process the uploaded file and save it to Firebase Storage
+        const filename = await uploadFile(file);
+
+        return res.status(200).json({filename}); 
+
+        // Save the filename to the user's information
+        
       }
-      try {
-        const userExists = await User.findOne({ username: req.body.username });
-        if (userExists) {
-          return res.status(403).json({
-            message: "Username is taken!",
-          });
-        }
-
-        const user = new User(req.body);
-
-        // Check if there is an uploaded image
-        if (req.file) {
-          const file = req.file;
-
-          // Process the uploaded file and save it to Firebase Storage
-          const filename = await uploadFile(file);
-
-          // Save the filename to the user's information
-          user.image = filename;
-        }
-
-        await user.save();
-        res.status(200).json({ message: "Signup success! Please login." });
-      } catch (err) {
-        console.log(err);
-        res.status(500).json({
-          message: "Internal server error",
-        });
-      }
-    });
+    })
   } catch (err) {
     console.log(err);
     res.status(500).json({
       message: "Internal server error",
     });
   }
+};
+
+
+const signUp = async (req, res) => {
+  // try {
+  // const uploadMiddleware = upload.single('image');
+  // uploadMiddleware(req, res, async (err) => {
+  //   if (err) {
+  //     return res.status(400).json({
+  //       error: err.message
+  //     });
+  //   }
+  try {
+    const userExists = await User.findOne({ username: req.body.username });
+    if (userExists) {
+      return res.status(403).json({
+        message: "Username is taken!",
+      });
+    }
+
+    const user = new User(req.body);
+
+    // Check if there is an uploaded image
+    // if (req.file) {
+    //   const file = req.file;
+
+    // Process the uploaded file and save it to Firebase Storage
+    // const filename = await uploadFile(file);
+
+    // Save the filename to the user's information
+    // user.image = filename;
+    // }
+
+    await user.save();
+    res.status(200).json({ message: "Signup success! Please login." });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+  // });
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(500).json({
+  //     message: "Internal server error",
+  //   });
+  // }
 };
 
 const verifyEmail = (req, res) => {
@@ -150,10 +181,10 @@ const requireSignIn = expressJwt({
 
 const checkRole = (roles) => (req, res, next) => {
   const { roleId } = req.auth;
-  const result = roles.some( role => roleId.includes(role));
+  const result = roles.some(role => roleId.includes(role));
   if (!result) {
     return res.status(403).json({ message: "Unauthorized" });
   }
   next();
 };
-module.exports = { requireSignIn , checkRole , signUp, signIn, verifyEmail, signOut};
+module.exports = { requireSignIn, checkRole, signUp, signIn, verifyEmail, signOut, uploadImage };
