@@ -39,6 +39,7 @@ exports.getOrderDetailById = async (req, res) => {
 exports.createOrderDetail = async (req, res) => {
     try {
         const { orderDetail } = req.body;
+        console.log(orderDetail);
         const existingOption = await option.findById(orderDetail.optionID);
         if (!existingOption) {
             return res.status(400).json({ error: "Invalid option ID" });

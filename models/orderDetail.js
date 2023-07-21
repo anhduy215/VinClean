@@ -23,10 +23,5 @@ const orderDetailSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  status: {
-    type: String,
-    trim: true,
-    required: true,
-  },
 });
 module.exports = mongoose.model("OrderDetail", orderDetailSchema);

@@ -1,20 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const Service = require("../models/service");
+const Option = require("../models/option");
 const mongoose = require("mongoose");
 
 //get service theo id
 exports.getServiceById = async (req, res) => {
   try {
     const serviceId = req.params.serviceID;
-    console.log(serviceId);
     const service = await Service.findById(serviceId);
 
     if (!service) {
       return res.status(404).json({ error: "Service not found" });
     }
+    const options = await Option.find({ serviceID: serviceId });
 
-    res.status(200).json({ service });
+    res.status(200).json({ options });
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch service", errorMessage: error.message });
   }

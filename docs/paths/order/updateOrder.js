@@ -14,6 +14,30 @@ module.exports = {
         },
       },
     ],
+    requestBody: {
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              order: {
+                type: "object",
+                properties: {
+                  status: {
+                    type: "string",
+                  },
+                },
+              },
+            },
+          },
+          example: {
+            order: {
+              status: "not paid",
+            },
+          },
+        },
+      },
+    },
     responses: {
       200: {
         description: "Success",

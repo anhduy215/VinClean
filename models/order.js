@@ -16,5 +16,10 @@ const orderSchema = new mongoose.Schema({
     type: Number,
     trim: true,
   },
+  status: {
+    type: String,
+    trim: true,
+    default: "not paid",
+  },
 });
 module.exports = mongoose.model("Order", orderSchema);
