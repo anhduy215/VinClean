@@ -4,6 +4,7 @@ const deleteUser = require("./deleteUserById");
 const updateUser = require("./updateUser");
 const createUser = require("./createUser");
 const getUserBySignedIn = require("./getUserBySignedIn");
+const updatePassword = require("./updatePass");
 module.exports = {
   "/users": {
     ...getAllUser,
@@ -21,5 +22,8 @@ module.exports = {
     ...getUserById,
     ...deleteUser,
     ...updateUser,
+  },
+  "/user/changePassword/{userId}": {
+    ...updatePassword
   },
 };
