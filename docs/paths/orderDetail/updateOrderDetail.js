@@ -49,9 +49,7 @@ module.exports = {
             orderDetail: {
               optionID: "optionid",
               dateBook: "2023-07-13T12:00:00.000Z",
-              dateEnd: "2023-07-13T14:00:00.000Z",
-              status: "done/notDone",
-            },
+              dateEnd: "2023-07-13T14:00:00.000Z",            },
           },
         },
       },

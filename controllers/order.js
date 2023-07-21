@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Order = require("../models/order");
 const OrderDetail = require("../models/orderDetail");
+const _ = require("lodash");
 const mongoose = require("mongoose");
 
 //get all order
@@ -38,9 +39,8 @@ exports.getOrderById = async (req, res) => {
 //add order
 exports.addOrder = async (req, res) => {
     try {
-        const newOrder = new Order({
-            accountID: req.auth._id,
-        });
+        const newOrder = new Order(req.body);
+        newOrder.accountID = req.auth._id;
 
         const savedOrder = await newOrder.save();
 
@@ -53,7 +53,7 @@ exports.addOrder = async (req, res) => {
 //update order
 exports.updateOrder = async (req, res) => {
     try {
-        const existingOrder = await Order.findById(req.params.orderID);
+        let existingOrder = await Order.findById(req.params.orderID);
         if (!existingOrder) {
             return res.status(400).json({ error: "Invalid order ID" });
         }
@@ -62,7 +62,8 @@ exports.updateOrder = async (req, res) => {
             return res.status(400).json({ error: "Invalid user ID" });
         }
         const allOrderDetail = await OrderDetail.find({ orderID: req.params.orderID });
-
+        existingOrder = _.extend(existingOrder, req.body);
+        
         let totalPrice = 0;
         allOrderDetail.forEach((orderDetail) => {
             totalPrice += orderDetail.price;
