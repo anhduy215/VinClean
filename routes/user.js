@@ -9,7 +9,9 @@ router.get("/users", requireSignIn, checkRole(["admin"]), controllersUser.allUse
 router.get("/user", requireSignIn, controllersUser.getUserBySignIn);
 router.get("/user/:userId", requireSignIn, checkRole(["admin"]), controllersUser.getUser);
 router.post("/user/create", requireSignIn, checkRole(["admin"]), controllersUser.createUser);
-router.put("/user/:userId", controllersUser.updateUserV2);
+router.put("/user/:userId", controllersUser.updateUser);
+router.put("/user/changePassword/:userId", controllersUser.updatePassword);
 router.delete("/user/:userId", requireSignIn, checkRole(["admin"]), controllersUser.deleteUser);
+router.param("userId",controllersUser.userByLogin);
 
 module.exports = router;

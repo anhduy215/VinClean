@@ -112,6 +112,7 @@ exports.updateUserV2 = async (req, res) => {
 };
 
 
+
 exports.updateUser = (req, res, next) => {
   let user = req.profile;
   user = _.extend(user, req.body);
@@ -126,6 +127,21 @@ exports.updateUser = (req, res, next) => {
     user.salt = undefined;
     res.json(user);
   });
+};
+
+exports.updatePassword = (req, res, next) => {
+  const user = req.profile;
+  const oldPassword = req.body.oldPassword;
+  const newPassword = req.body.password;
+  user.updatePassword(oldPassword, newPassword)
+    .then((updatedUser) => {
+      res.status(200).json({message: "Update Success", user: updatedUser});
+      console.log("Mật khẩu đã được cập nhật thành công.");
+    })
+    .catch((err) => {
+      console.error("Đã xảy ra lỗi khi cập nhật mật khẩu:", err);
+      return res.status(500).json({ message: err.message });
+    });
 };
 
 exports.deleteUser = (req, res, next) => {

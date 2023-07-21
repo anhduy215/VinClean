@@ -69,6 +69,29 @@ userSchema
     return this._password;
   });
 userSchema.methods = {
+  updatePassword: async function (oldPassword, newPassword) {
+    if (!oldPassword || !newPassword) {
+      throw new Error('Please provide password infomation');
+    }
+
+    if (!this.authenticate(oldPassword)) {
+      throw new Error('The old password does not match');
+    }
+
+    this.salt = uuidv1();
+    this.hashed_password = this.encryptPassword(newPassword);
+    this.updateDate = Date.now();
+
+    try {
+      await this.save();
+      this.hashed_password = undefined;
+      this.salt = undefined;
+      return this;
+    } catch (error) {
+      console.error('Đã xảy ra lỗi khi cập nhật mật khẩu:', error);
+      throw new Error('Have a problem when user update.');
+    }
+  },
   authenticate: function (plainText) {
     return this.encryptPassword(plainText) === this.hashed_password;
   },
@@ -83,5 +106,6 @@ userSchema.methods = {
       return "";
     }
   },
+
 };
 module.exports = mongoose.model("Users", userSchema);

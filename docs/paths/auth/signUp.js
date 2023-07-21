@@ -4,7 +4,7 @@ module.exports = {
     requestBody: {
       required: true,
       content: {
-        "multipart/form-data": {
+        "application/json": {
           schema: {
             type: "object",
             properties: {
@@ -19,10 +19,6 @@ module.exports = {
               password: {
                 type: "string",
                 example: "Dragoncute!123",
-              },
-              image: {
-                type: "string",
-                format: "binary",
               },
             },
           },
