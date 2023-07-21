@@ -20,10 +20,6 @@ module.exports = {
                 type: "string",
                 example: "Dragoncute!123",
               },
-              image: {
-                type: "string",
-                example: "urlFireBase",
-              },
             },
           },
         },
