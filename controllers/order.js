@@ -27,8 +27,9 @@ exports.getOrderById = async (req, res) => {
         if (!order) {
             return res.status(404).json({ error: "Order not found" });
         }
+        const orderDetail = await OrderDetail.find(orderID = orderId);
 
-        res.status(200).json({ order });
+        res.status(200).json({ order, orderDetail });
     } catch (error) {
         res.status(500).json({ error: "Failed to fetch order", errorMessage: error.message });
     }

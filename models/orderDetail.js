@@ -26,7 +26,7 @@ const orderDetailSchema = new mongoose.Schema({
   status: {
     type: String,
     trim: true,
-    required: true,
+    default: "not done",
   },
 });
 module.exports = mongoose.model("OrderDetail", orderDetailSchema);
