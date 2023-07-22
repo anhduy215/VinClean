@@ -75,15 +75,6 @@ exports.updateOrderDetail = async (req, res) => {
             return res.status(400).json({ error: "Invalid order detail ID" });
         }
 
-        const order = await Order.findById(existingOrderDetail.orderID);
-        if (!order) {
-            return res.status(404).json({ error: "Order not found" });
-        }
-
-        if (order.accountID != req.auth._id) {
-            return res.status(403).json({ error: "Unauthorized access" });
-        }
-
         const existingOption = await option.findById(orderDetail.optionID);
         if (!existingOption) {
             return res.status(400).json({ error: "Invalid option ID" });
