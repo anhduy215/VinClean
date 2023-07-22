@@ -20,6 +20,14 @@ module.exports = {
                 type: "string",
                 example: "Dragoncute!123",
               },
+              role: {
+                type: "array",
+                items: {
+                  type: "string",
+                  enum: ["user", "staff", "admin"], 
+                },
+                example: ["user"], 
+              },
             },
           },
         },
