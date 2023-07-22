@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/orderDetail', controllersOrderDetail.allOrderDetail);
 router.get('/orderDetail/:orderDetailID', controllersOrderDetail.getOrderDetailById);
 router.post('/orderDetail', requireSignIn, checkRole(["user"]), controllersOrderDetail.createOrderDetail);
-router.put('/orderDetail/:orderDetailID', requireSignIn, checkRole(["user"]), controllersOrderDetail.updateOrderDetail);
+router.put('/orderDetail/:orderDetailID', controllersOrderDetail.updateOrderDetail);
 router.delete('/orderDetail/:orderDetailID', requireSignIn, checkRole(["user"]), controllersOrderDetail.deleteOrderDetail);
 
 module.exports = router;
